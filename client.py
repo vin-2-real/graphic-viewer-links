@@ -159,4 +159,21 @@ def build_login_screen():
 
 # ========== AUTO-LOGIN ========== #
 if os.path.exists(SESSION_FILE):
-    try
+    try:
+        with open(SESSION_FILE, "r") as f:
+            data = f.read().strip().split(":")
+            if len(data) == 2:
+                u, p = data
+                r = requests.post(SERVER_URL + "/login", json={"username": u, "password": p})
+                if r.status_code == 200:
+                    build_main_menu(u)
+                else:
+                    build_login_screen()
+            else:
+                build_login_screen()
+    except:
+        build_login_screen()
+else:
+    build_login_screen()
+
+root.mainloop()
