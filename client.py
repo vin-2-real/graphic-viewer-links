@@ -4,6 +4,25 @@ from tkinter import messagebox
 from PIL import Image, ImageTk
 import requests
 import webbrowser
+import subprocess
+import sys
+
+# Auto-install required modules
+def install(package):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
+try:
+    import requests
+except ImportError:
+    install("requests")
+    import requests
+
+try:
+    from PIL import Image, ImageTk
+except ImportError:
+    install("pillow")
+    from PIL import Image, ImageTk
+
 
 SERVER_URL = 'http://YOUR_SERVER_IP:5000'
 
