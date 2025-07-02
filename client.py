@@ -1,13 +1,11 @@
-# client.py
 import tkinter as tk
-from tkinter import messagebox
-from PIL import Image, ImageTk
+from tkinter import messagebox, PhotoImage
 import requests
 import webbrowser
 import subprocess
 import sys
 
-# Auto-install required modules
+# ✅ Auto-install requests (only external dependency)
 def install(package):
     subprocess.check_call([sys.executable, "-m", "pip", "install", package])
 
@@ -17,13 +15,7 @@ except ImportError:
     install("requests")
     import requests
 
-try:
-    from PIL import Image, ImageTk
-except ImportError:
-    install("pillow")
-    from PIL import Image, ImageTk
-
-
+# 🌐 Set your server IP here
 SERVER_URL = 'http://YOUR_SERVER_IP:5000'
 
 def send_request(endpoint, data):
@@ -74,19 +66,21 @@ class CheatClient:
         links = {
             "CS2": "https://yourlink.com/cs2",
             "Roblox": "https://yourlink.com/roblox",
-            "Skate 3": "https://yourlink.com/skate3"
+            "Skate3": "https://yourlink.com/skate3"
         }
-        for i, (name, url) in enumerate(links.items()):
-            img = ImageTk.PhotoImage(Image.open(f"{name.lower()}.png").resize((150, 100)))
+
+        positions = [(30, 100), (190, 100), (350, 100)]
+        for (name, url), (x, y) in zip(links.items(), positions):
+            img = PhotoImage(file=f"{name.lower()}.png")
             b = tk.Button(self.root, image=img, command=lambda u=url: webbrowser.open(u))
             b.image = img
-            b.place(x=30 + (i * 160), y=100)
+            b.place(x=x, y=y)
 
-        # Top right image
-        top_img = ImageTk.PhotoImage(Image.open("info_icon.png").resize((40, 40)))
-        top_btn = tk.Button(self.root, image=top_img, command=lambda: webbrowser.open("https://yourdiscord.com"))
-        top_btn.image = top_img
-        top_btn.place(x=450, y=10)
+        # Info button in top right
+        info_img = PhotoImage(file="info_icon.png")
+        info_btn = tk.Button(self.root, image=info_img, command=lambda: webbrowser.open("https://yourdiscord.com"))
+        info_btn.image = info_img
+        info_btn.place(x=450, y=10)
 
     def clear(self):
         for widget in self.root.winfo_children():
