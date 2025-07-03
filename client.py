@@ -12,12 +12,12 @@ except:
     pass
 
 # ========== CONFIG ========== #
-SERVER_URL = "http://YOUR.SERVER.IP:PORT"
+SERVER_URL = "192.168.1.135:5000"
 ASSETS_DIR = "assets"
 SESSION_FILE = os.path.join(ASSETS_DIR, "session.txt")
 
 LINK_CS2 = "https://example.com/cs2"
-LINK_ROBLOX = "https://example.com/roblox"
+LINK_ROBLOX = "192.168.1.135:5000/assets/robloxcheat/1.txt"
 LINK_SKATE3 = "https://example.com/skate3"
 LINK_ICON = "https://example.com/yourdiscord"
 
