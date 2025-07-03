@@ -64,7 +64,7 @@ def build_main_menu(username):
 
     # Dropdown button
     def toggle_dropdown():
-        nonlocal dropdown_open
+        global dropdown_open
         if dropdown_open:
             dropdown_frame.place_forget()
             dropdown_open = False
